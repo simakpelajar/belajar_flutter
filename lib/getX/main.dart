@@ -244,6 +244,216 @@
 //   }
 // }
 
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(home: HomePage());
+//   }
+// }
+
+// class HomePage extends StatelessWidget {
+//   const HomePage({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Bottom Sheet')),
+//       body: Center(
+//         child: ElevatedButton(
+//           onPressed: () {
+//             showModalBottomSheet(
+//               context: context,
+//               builder:
+//                   (context) => Container(
+//                     height: 300,
+//                     decoration: BoxDecoration(
+//                       color: Colors.blue,
+//                       borderRadius: BorderRadius.only(
+//                         topLeft: Radius.circular(20),
+//                         topRight: Radius.circular(20),
+//                       ),
+//                     ),
+
+//                     child: ListView(
+//                       children: [
+//                         ListTile(
+//                           leading: Icon(Icons.home),
+//                           title: Text("Home  "),
+//                         ),
+//                         ListTile(
+//                           leading: Icon(Icons.home),
+//                           title: Text("Profile"),
+//                         ),
+//                         ListTile(
+//                           leading: Icon(Icons.home),
+//                           title: Text("Settings"),
+//                         ),
+//                         ListTile(
+//                           leading: Icon(Icons.home),
+//                           title: Text("Settings"),
+//                         ),
+//                         ListTile(
+//                           leading: Icon(Icons.home),
+//                           title: Text("Settings"),
+//                         ),
+//                         ListTile(
+//                           leading: Icon(Icons.home),
+//                           title: Text("Settings"),
+//                         ),
+//                         ListTile(
+//                           leading: Icon(Icons.home),
+//                           title: Text("Settings"),
+//                         ),
+//                         ListTile(
+//                           leading: Icon(Icons.home),
+//                           title: Text("Settings"),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//             );
+
+//             Get.bottomSheet(Container(height: 300, color: Colors.red));
+//           },
+//           child: Text("Open Bottom Sheet"),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(home: HomePage());
+//   }
+// }
+
+// class HomePage extends StatelessWidget {
+//   HomePage({super.key});
+
+//   var homeReactive = Get.put(HomeControllerReactive());
+//   var homeSimple = Get.put(HomeControllerSimple());
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text("State Reactive vs Simple State")),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//               children: [
+//                 Container(
+//                   height: 200,
+//                   width: 200,
+//                   decoration: BoxDecoration(color: Colors.amberAccent),
+//                   child: Column(
+//                     mainAxisAlignment: MainAxisAlignment.start,
+//                     crossAxisAlignment: CrossAxisAlignment.center,
+
+//                     children: [
+//                       Text("Ini untuk state reactive"),
+//                       SizedBox(height: 50),
+//                       Obx(
+//                         () => Text(
+//                           "${homeReactive.dataPantau}",
+//                           style: TextStyle(fontSize: 20),
+//                         ),
+//                       ),
+
+//                       SizedBox(height: 50),
+//                       ElevatedButton(
+//                         onPressed: () {
+//                           homeReactive.tambahData();
+//                         },
+//                         child: Text("Tambah Data"),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+
+//                 Container(
+//                   height: 200,
+//                   width: 200,
+//                   decoration: BoxDecoration(color: Colors.amberAccent),
+//                   child: Column(
+//                     mainAxisAlignment: MainAxisAlignment.start,
+//                     crossAxisAlignment: CrossAxisAlignment.center,
+
+//                     children: [
+//                       Text("Ini untuk state Simple"),
+//                       SizedBox(height: 50),
+//                       GetBuilder<HomeControllerSimple>(
+//                         builder:
+//                             (controller) => Text("${homeSimple.dataPantau}"),
+//                       ),
+//                       SizedBox(height: 10),
+//                       ElevatedButton(
+//                         onPressed: () {
+//                           homeSimple.tambahData();
+//                         },
+//                         child: Text("Tambah Data"),
+//                       ),
+//                       ElevatedButton(
+//                         onPressed: () {
+//                           homeSimple.refreshData();
+//                         },
+//                         child: Text("Refresh Tampilan"),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class HomeControllerReactive extends GetxController {
+//   var dataPantau =
+//       0.obs; //obs ini obsevre untuk peantauan ui yang ada untuk di rebuild widget nya // view wajib obx
+
+//   void tambahData() {
+//     dataPantau++;
+//   }
+// }
+
+// class HomeControllerSimple extends GetxController {
+//   int dataPantau = 0; // gak perlu obs soalnya dia udah getX
+
+//   void tambahData() {
+//     dataPantau++;
+//   }
+
+//   void refreshData() {
+//     update();
+//   }
+// }
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -261,72 +471,80 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+   HomePage({super.key});
+
+  final HomeC = Get.put(HomeControllerReactive());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Bottom Sheet')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              builder:
-                  (context) => Container(
-                    height: 300,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                    ),
+      appBar: AppBar(title: Text("Tipe Data RX")),
+      body: ListView(
+        padding: EdgeInsets.all(20),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Obx((){
 
-                    child: ListView(
-                      children: [
-                        ListTile(
-                          leading: Icon(Icons.home),
-                          title: Text("Home  "),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.home),
-                          title: Text("Profile"),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.home),
-                          title: Text("Settings"),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.home),
-                          title: Text("Settings"),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.home),
-                          title: Text("Settings"),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.home),
-                          title: Text("Settings"),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.home),
-                          title: Text("Settings"),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.home),
-                          title: Text("Settings"),
-                        ),
-                      ],
-                    ),
-                  ),
-            );
+                return Text("${HomeC.dataString.value}", style: TextStyle(fontSize: 20));
+              }),
+              
+              Row(
+                children: [
+                  ElevatedButton(onPressed: () {
+                    HomeC.updateDataString();
+                  }, child: Text("Update")),
+                  ElevatedButton(onPressed: () {
+                      HomeC.resetDataString();
+                  }, child: Text("Reset")),
+                ],
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Obx((){
 
-            Get.bottomSheet(Container(height: 300, color: Colors.red));
-          },
-          child: Text("Open Bottom Sheet"),
-        ),
+                return Text("${HomeC.dataPantau.value}", style: TextStyle(fontSize: 20));
+              }),
+              
+              Row(
+                children: [
+                  ElevatedButton(onPressed: () {
+                    HomeC.tambahData();
+                  }, child: Text("+")),
+                  ElevatedButton(onPressed: () {
+                      HomeC.kurangData();
+                  }, child: Text("-")),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
+  }
+}
+
+
+class HomeControllerReactive extends GetxController {
+  RxInt dataPantau =
+      0.obs; //obs ini obsevre untuk peantauan ui yang ada untuk di rebuild widget nya // view wajib obx
+   RxString dataString =
+      "kiwkiw".obs; //obs ini obsevre untuk peantauan ui yang ada untuk di rebuild widget nya // view wajib obx
+
+  void tambahData() {
+    dataPantau++;
+  }
+
+  void kurangData() => dataPantau--;
+
+  void updateDataString(){
+    dataString.value = "data {udpated}";
+  }
+   void resetDataString(){
+    dataString.value = "kiwkiw";
   }
 }
